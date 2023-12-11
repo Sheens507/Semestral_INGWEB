@@ -1,0 +1,32 @@
+ID: 1
+Usuario: Gabriela
+E-mail: gabi@outlook.com
+Nombre: Lineth
+Apellido: Hernandez
+Fecha de nacimiento o afiliación: 2002-06-15
+Tipo de usuario: regular
+
+ID: 2
+Usuario: Martin
+E-mail: martin@gmail.com
+Nombre: Martin
+Apellido: Romero
+Fecha de nacimiento o afiliación: 2023-11-13
+Tipo de usuario: regular
+
+ID: 3
+Usuario: Admin1
+E-mail: admin@outlook.com
+Nombre: Admin
+Apellido: Admin
+Fecha de nacimiento o afiliación: 2023-11-29
+Tipo de usuario: admin
+
+ID: 4
+Usuario: Andres1
+E-mail: andres@gmail.com
+Nombre: Andres
+Apellido: Trelles
+Fecha de nacimiento o afiliación: 2001-06-14
+Tipo de usuario: regular
+

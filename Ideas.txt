@@ -1,0 +1,67 @@
+PARA LA IDEA QUE TENGO QUE SOLO LOS USUARIOS ADMIN PUEDA VER DISPLAY_INFO_ADMIN.PHP SERIA BAJO ESTA PRIMICIA SACADA DE CHATGPT:
+---------------------------------------------------------------------------------------------------------------------------------------
+<?php
+// Inicia la sesión
+session_start();
+
+// Conecta a la base de datos (asegúrate de cambiar las credenciales según tu configuración)
+$conexion = new mysqli("localhost", "usuario", "contrasena", "basededatos");
+
+// Verifica la conexión
+if ($conexion->connect_error) {
+    die("Error de conexión a la base de datos: " . $conexion->connect_error);
+}
+
+// Verifica si el usuario está autenticado
+if (isset($_SESSION['usuario_id'])) {
+    // Obtiene la información del usuario de la base de datos
+    $usuario_id = $_SESSION['usuario_id'];
+    $consulta = "SELECT caracteristica FROM usuarios WHERE id = $usuario_id";
+    $resultado = $conexion->query($consulta);
+
+    // Verifica si la consulta fue exitosa
+    if ($resultado) {
+        // Obtiene la característica del usuario
+        $fila = $resultado->fetch_assoc();
+        $caracteristicaUsuario = $fila['caracteristica'];
+
+        // Verifica la característica requerida
+        if ($caracteristicaUsuario == 'X') {
+            // El usuario tiene la característica requerida, puede continuar
+            echo "Bienvenido, usuario con la característica X.";
+        } else {
+            // El usuario no tiene la característica requerida, redirige o muestra un mensaje de error
+            echo "No tienes la característica requerida para acceder.";
+        }
+    } else {
+        die("Error en la consulta: " . $conexion->error);
+    }
+} else {
+    // El usuario no está autenticado, redirige o muestra un mensaje de error
+    echo "Debes iniciar sesión para acceder.";
+}
+?>
+---------------------------------------------------------------------------------------------------------------------------------------
+EN VEZ DE IMPRIMIR QUE NO CUENTA CON LAS CARACTERISTICAS DE ADMIN QUE LO REDIRIJA A DISPLAY_INFO_USERS.PHP BAJO EL PRINCIPIO DEL PARCIAL, ESTO FUE LO QUE IMPLEMENTE
+
+<?php
+    // Inicia la sesión
+    session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php');
+        exit();
+    }
+
+    // Incluye el archivo cookie_handler.php
+    include('../src/cookie_handler.php');
+
+    // Obtiene el último equipo seleccionado
+    $lastSelectedTeam = getLastSelectedTeam();
+?>
+
+SI ES RECHAZADO AQUI TAMBIEN MANDARLO A DISPLAY_INFO.PHP QUE ES SOLO PARA VER VER RESULTADOS Y SI TRATA DE AGREGAR A FAV LO MANDA A LOGIN
+OSEA QUEDARIA TAL QUE 
+INDEX->CALL_API->DISPLAY_INFO_ADMIN(SI SE RECHAZA SIGUE SI NO SEQUEDA AQUI)->DISPLAY_INFO_USERS(SI SE RECHAZA SIGUE SI NO SEQUEDA AQUI)->DISPLAY_INFO(SI SE TOCA LA ESTRELLA MANDA A LOGIN Y DE LOGIN INICIA EL CICLONUEVAMENTE)
+
+PREGUNTAS AL DM
